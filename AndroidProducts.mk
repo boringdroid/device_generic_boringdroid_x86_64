@@ -1,0 +1,3 @@
+
+PRODUCT_MAKEFILES := \
+	$(LOCAL_DIR)/cobra_x86_64.mk
