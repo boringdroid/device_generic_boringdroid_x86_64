@@ -36,7 +36,10 @@ PRODUCT_PACKAGES += \
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulator.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86_64/device.mk)
+# region @cobra
+# $(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86_64/device.mk)
+$(call inherit-product, device/generic/cobra_x86_64/device.mk)
+# endregion
 
 # Needed by Pi newly launched device to pass VtsTrebleSysProp on GSI
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
@@ -55,3 +58,20 @@ PRODUCT_NAME := cobra_x86_64
 PRODUCT_DEVICE := cobra_x86_64
 PRODUCT_BRAND := CobraOS
 PRODUCT_MODEL := CobraOS on IA x86_64 Emulator
+
+# region @cobra
+# packages
+PRODUCT_PACKAGES += \
+    Taskbar
+
+PRODUCT_REMOVE_PACKAGES := \
+    QuickSearchBox \
+    Music \
+    Browser2 \
+    HTMLViewer \
+    Dialer \
+    Contacts \
+
+# Taskbar
+ENABLE_TASKBAR_REPLACE := true
+# endregion
