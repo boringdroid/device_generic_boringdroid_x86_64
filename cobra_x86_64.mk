@@ -74,4 +74,8 @@ PRODUCT_REMOVE_PACKAGES := \
 
 # Taskbar
 ENABLE_TASKBAR_REPLACE := true
+
+# Recents
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.recents.grid=true
 # endregion
