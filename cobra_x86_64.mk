@@ -58,21 +58,3 @@ PRODUCT_NAME := cobra_x86_64
 PRODUCT_DEVICE := cobra_x86_64
 PRODUCT_BRAND := CobraOS
 PRODUCT_MODEL := CobraOS on IA x86_64 Emulator
-
-# region @cobra
-# packages
-PRODUCT_PACKAGES += \
-    Taskbar
-
-PRODUCT_REMOVE_PACKAGES := \
-    QuickSearchBox \
-    Music \
-    Browser2 \
-    HTMLViewer \
-    Dialer \
-    Contacts \
-
-# Recents
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.recents.grid=true
-# endregion
