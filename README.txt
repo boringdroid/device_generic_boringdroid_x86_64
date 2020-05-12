@@ -1,4 +1,4 @@
-The "cobra_x86_64" product defines a non-hardware-specific IA target
+The "boringdroid_x86_64" product defines a non-hardware-specific IA target
 without a kernel or bootloader.
 
 It can be used to build the entire user-level system, and

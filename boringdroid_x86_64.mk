@@ -36,9 +36,9 @@ PRODUCT_PACKAGES += \
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulator.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
-# region @cobra
+# region @boringdroid
 # $(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86_64/device.mk)
-$(call inherit-product, device/generic/cobra_x86_64/device.mk)
+$(call inherit-product, device/generic/boringdroid_x86_64/device.mk)
 # endregion
 
 # Needed by Pi newly launched device to pass VtsTrebleSysProp on GSI
@@ -54,7 +54,7 @@ PRODUCT_PACKAGES += \
 	vgabios-cirrus.bin \
 
 # Overrides
-PRODUCT_NAME := cobra_x86_64
-PRODUCT_DEVICE := cobra_x86_64
-PRODUCT_BRAND := CobraOS
-PRODUCT_MODEL := CobraOS on IA x86_64 Emulator
+PRODUCT_NAME := boringdroid_x86_64
+PRODUCT_DEVICE := boringdroid_x86_64
+PRODUCT_BRAND := boringdroid
+PRODUCT_MODEL := boringdroid on IA x86_64 Emulator
