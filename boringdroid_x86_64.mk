@@ -15,7 +15,10 @@
 #
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
+# region @boringdroid
+PRODUCT_PACKAGE_OVERLAYS += \
+    vendor/boringdroid/overlay
+# endregion
 # The system image of aosp_x86_64-userdebug is a GSI for the devices with:
 # - x86 64 bits user space
 # - 64 bits binder interface
@@ -36,6 +39,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_common.mk)
 $(call inherit-product-if-exists, device/generic/goldfish/x86_64-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86_64/device.mk)
+# region @boringdroid
+$(call inherit-product, vendor/boringdroid/boringdroid.mk)
+# endregion
 
 # Enable mainline checking for excat this product name
 ifeq (aosp_x86_64,$(TARGET_PRODUCT))
