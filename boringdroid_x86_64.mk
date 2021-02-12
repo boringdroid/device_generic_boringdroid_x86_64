@@ -26,6 +26,11 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system.mk)
 ifeq (sdk_phone_x86_64,$(TARGET_PRODUCT))
 PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
 endif
+# region @boringdroid
+ifeq (boringdroid_x86_64,$(TARGET_PRODUCT))
+PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
+endif
+# endregion
 
 #
 # All components inherited here go to system_ext image
@@ -50,7 +55,13 @@ $(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86_64/device.mk)
 -include development/build/product_sdk.mk
 
 # Overrides
-PRODUCT_BRAND := Android
-PRODUCT_NAME := sdk_phone_x86_64
-PRODUCT_DEVICE := generic_x86_64
-PRODUCT_MODEL := Android SDK built for x86_64
+# region @boringdroid
+# PRODUCT_BRAND := Android
+# PRODUCT_NAME := sdk_phone_x86_64
+# PRODUCT_DEVICE := generic_x86_64
+# PRODUCT_MODEL := Android SDK built for x86_64
+PRODUCT_BRAND := boringdroid
+PRODUCT_NAME := boringdroid_x86_64
+PRODUCT_DEVICE := boringdroid_x86_64
+PRODUCT_MODEL := Boringdroid built for x86_64
+# endregion
