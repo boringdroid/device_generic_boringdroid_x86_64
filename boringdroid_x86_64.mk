@@ -30,6 +30,8 @@ endif
 ifeq (boringdroid_x86_64,$(TARGET_PRODUCT))
 PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
 endif
+PRODUCT_COPY_FILES += \
+    device/generic/goldfish/data/etc/config.ini.freeform:config.ini \
 # endregion
 
 #
