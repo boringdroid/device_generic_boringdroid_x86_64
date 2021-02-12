@@ -15,7 +15,10 @@
 #
 QEMU_USE_SYSTEM_EXT_PARTITIONS := true
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
+# region @boringdroid
+PRODUCT_PACKAGE_OVERLAYS += \
+    vendor/boringdroid/overlay
+# endregion
 #
 # All components inherited here go to system image
 #
@@ -27,9 +30,6 @@ ifeq (sdk_phone_x86_64,$(TARGET_PRODUCT))
 PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
 endif
 # region @boringdroid
-ifeq (boringdroid_x86_64,$(TARGET_PRODUCT))
-PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
-endif
 PRODUCT_COPY_FILES += \
     device/generic/goldfish/data/etc/config.ini.freeform:config.ini \
 # endregion
@@ -51,6 +51,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
 $(call inherit-product-if-exists, device/generic/goldfish/x86_64-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86_64/device.mk)
+# region @boringdroid
+$(call inherit-product, vendor/boringdroid/boringdroid.mk)
+# endregion
 
 # Define the host tools and libs that are parts of the SDK.
 -include sdk/build/product_sdk.mk
