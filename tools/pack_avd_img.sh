@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Copyright (C) 2020 The Android Open Source Project
+# Copyright (C) 2021 The boringdroid Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,6 +27,15 @@ if [[ -z $ANDROID_BUILD_TOP ]]; then
     echo "err: please set ANDROID_BUILD_TOP='/android'"
     exit
 fi
+
+OUT_DIR=$ANDROID_PRODUCT_OUT/boringdroid-avd-images
+rm -rf $OUT_DIR
+mkdir -p $OUT_DIR
+echo out dir is $OUT_DIR
+
+AVD_IMAGE_ZIP=$ANDROID_PRODUCT_OUT/boringdroid-avd-images.zip
+rm -rf $AVD_IMAGE_ZIP
+echo final avd image file is $AVD_IMAGE_ZIP
 
 if [[ -z $OUT_DIR ]]; then
     echo "err: please set OUT_DIR='/my/out/dir/x86_64'"
