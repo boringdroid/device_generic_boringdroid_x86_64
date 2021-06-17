@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Copyright (C) 2020 The Android Open Source Project
+# Copyright (C) 2021 The boringdroid Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,8 +34,11 @@ if [[ -z $ANDROID_SDK_ROOT ]]; then
     ANDROID_SDK_ROOT="$DEFAULT_ANDROID_SDK_ROOT"
 fi
 
+WORKDIR="$HOME/boringdroid-avd"
+echo boringdroid avd dir is $WORKDIR
 if [[ -z $WORKDIR ]]; then
-    WORKDIR="$HOME/workdir"
+    echo please create $HOME/boringdroid-avd directory, and unzip avd images to it.
+    exit
 fi
 
 if [[ -z $ANDROID_AVD_HOME ]]; then
@@ -49,9 +53,11 @@ if [[ -z $AVD_IMAGE_DIR ]]; then
     AVD_IMAGE_DIR="$WORKDIR/$ABI"
 fi
 
-if [[ -z $AVD_NAME ]]; then
-    AVD_NAME="my_car_avd_$ABI"
-fi
+AVD_NAME="boringdroid_avd_11_$ABI"
+echo avd name is $AVD_NAME
+# if [[ -z $AVD_NAME ]]; then
+#     AVD_NAME="boringdroid_avd_$ABI"
+# fi
 
 if [[ -z $DISPLAY_DENSITY ]]; then
     DISPLAY_DENSITY=213
@@ -71,9 +77,8 @@ if [[ -z $RAM_MB ]]; then
 fi
 
 # Get the script dir
-MY_NAME=$0
-MY_FILENAME=${MY_NAME##*/}  # = "name.sh"
-MY_DIR=${MY_NAME%/$MY_FILENAME}  # = "/path/to"
+MY_DIR=$WORKDIR/scripts
+echo MY_DIR is $MY_DIR
 
 if ! [[ -f "$ANDROID_AVD_HOME/$AVD_NAME.avd/config.ini" ]]; then
     # Create the AVD config as there is no one
