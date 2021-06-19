@@ -28,12 +28,16 @@ if [[ -z $ANDROID_BUILD_TOP ]]; then
     exit
 fi
 
-OUT_DIR=$ANDROID_PRODUCT_OUT/boringdroid-avd-images
-rm -rf $OUT_DIR
+VERSION=11
+ABI="x86_64"
+PARENT_DIR=$ANDROID_PRODUCT_OUT/boringdroid-avd-images
+COMMON_DIR=$PARENT_DIR/$VERSION
+OUT_DIR=$COMMON_DIR/$ABI/images
+rm -rf $COMMON_DIR
 mkdir -p $OUT_DIR
 echo out dir is $OUT_DIR
 
-AVD_IMAGE_ZIP=$ANDROID_PRODUCT_OUT/boringdroid-avd-images.zip
+AVD_IMAGE_ZIP=$ANDROID_PRODUCT_OUT/boringdroid-avd-2021-06-19.zip
 rm -rf $AVD_IMAGE_ZIP
 echo final avd image file is $AVD_IMAGE_ZIP
 
@@ -94,17 +98,27 @@ echo
 echo In $OUT_DIR:
 ls -l $OUT_DIR
 
+SCRIPTS_DIR=$COMMON_DIR/scripts
+rm -rf $SCRIPTS_DIR
+mkdir -p $SCRIPTS_DIR
+echo scripts dir $SCRIPTS_DIR
+SOURCE_DIR=device/generic/boringdroid_x86_64/tools
+echo source dir $SOURCE_DIR
+ls $SOURCE_DIR
+cp $SOURCE_DIR/create_avd_config.sh $SCRIPTS_DIR/
+cp $SOURCE_DIR/run_local_avd.sh $SCRIPTS_DIR/
+ls $SCRIPTS_DIR
+
 if [[ -n $AVD_IMAGE_ZIP ]]; then
 
     rm $AVD_IMAGE_ZIP
 
-    echo Zipping $OUT_DIR to $AVD_IMAGE_ZIP
+    echo Zipping $COMMON_DIR to $AVD_IMAGE_ZIP
     # to perserve ABI in the zip, assuming OUT_DIR always ends with ABI
     # e.g. /path/to/x86_64
-    ABI=${OUT_DIR##*/}  # = "x86_64"
-    PATH_TO_IMG_DIR=${OUT_DIR%/$ABI}  # = "/path/to"
+    PATH_TO_IMG_DIR=$PARENT_DIR
     cd $PATH_TO_IMG_DIR
-    zip -r $AVD_IMAGE_ZIP $ABI
+    zip -r $AVD_IMAGE_ZIP $VERSION
     cd -
     unzip -l $AVD_IMAGE_ZIP
 fi
