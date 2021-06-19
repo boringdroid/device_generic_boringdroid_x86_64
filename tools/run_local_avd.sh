@@ -49,11 +49,14 @@ if [[ -z $ABI ]]; then
     ABI="x86_64"
 fi
 
-if [[ -z $AVD_IMAGE_DIR ]]; then
-    AVD_IMAGE_DIR="$WORKDIR/$ABI"
-fi
+VERSION=11
+AVD_IMAGE_DIR="$WORKDIR/$VERSION/$ABI/images"
+echo avd image dir $AVD_IMAGE_DIR
+# if [[ -z $AVD_IMAGE_DIR ]]; then
+#     AVD_IMAGE_DIR="$WORKDIR/$ABI"
+# fi
 
-AVD_NAME="boringdroid_avd_11_$ABI"
+AVD_NAME="boringdroid_avd_$VERSION_$ABI"
 echo avd name is $AVD_NAME
 # if [[ -z $AVD_NAME ]]; then
 #     AVD_NAME="boringdroid_avd_$ABI"
@@ -77,7 +80,7 @@ if [[ -z $RAM_MB ]]; then
 fi
 
 # Get the script dir
-MY_DIR=$WORKDIR/scripts
+MY_DIR=$WORKDIR/$VERSION/scripts
 echo MY_DIR is $MY_DIR
 
 if ! [[ -f "$ANDROID_AVD_HOME/$AVD_NAME.avd/config.ini" ]]; then
