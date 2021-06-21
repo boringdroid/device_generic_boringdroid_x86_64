@@ -59,12 +59,13 @@ avd.ini.displayname = ${AVD_NAME}
 hw.ramSize = ${RAM_MB}
 abi.type = ${ABI}
 
-tag.display = Automotive
-tag.id = android-automotive
+tag.display = Tablet
+tag.id = boringdroid-11
 hw.device.manufacturer = google
 hw.device.name = hawk
 avd.ini.encoding = UTF-8
-disk.dataPartition.size = 6442450944
+disk.dataPartition.size = 6G
+display.settings.xml=freeform
 fastboot.chosenSnapshotFile =
 fastboot.forceChosenSnapshotBoot = no
 fastboot.forceColdBoot = no

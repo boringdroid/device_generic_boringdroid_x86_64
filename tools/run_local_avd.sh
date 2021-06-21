@@ -67,11 +67,11 @@ if [[ -z $DISPLAY_DENSITY ]]; then
 fi
 
 if [[ -z $DISPLAY_WIDTH ]]; then
-    DISPLAY_WIDTH=1920
+    DISPLAY_WIDTH=1440
 fi
 
 if [[ -z $DISPLAY_HEIGHT ]]; then
-    DISPLAY_HEIGHT=1080
+    DISPLAY_HEIGHT=960
 fi
 
 if [[ -z $RAM_MB ]]; then
