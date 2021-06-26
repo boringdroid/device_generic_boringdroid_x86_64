@@ -37,6 +37,8 @@ rm -rf $COMMON_DIR
 mkdir -p $OUT_DIR
 echo out dir is $OUT_DIR
 
+cp device/generic/boringdroid_x86_64/tools/README-user.md $COMMON_DIR/README.md
+
 AVD_IMAGE_ZIP=$ANDROID_PRODUCT_OUT/boringdroid-avd-2021-06-19.zip
 rm -rf $AVD_IMAGE_ZIP
 echo final avd image file is $AVD_IMAGE_ZIP
