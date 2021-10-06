@@ -31,7 +31,7 @@ PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
 endif
 # region @boringdroid
 PRODUCT_COPY_FILES += \
-    device/generic/goldfish/data/etc/config.ini.freeform:config.ini \
+    device/generic/boringdroid_x86_64/data/etc/config.ini.boringdroid:config.ini \
 # endregion
 
 #
