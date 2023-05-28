@@ -19,13 +19,19 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_PACKAGE_OVERLAYS += \
     vendor/boringdroid/overlay
 # endregion
+
+# This is a build configuration for a full-featured build of the
+# Open-Source part of the tree. It's geared toward a US-centric
+# build quite specifically for the emulator, and might not be
+# entirely appropriate to inherit from for on-device configurations.
+
 #
 # All components inherited here go to system image
 #
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_system.mk)
 
-# Enable mainline checking for excat this product name
+# Enable mainline checking for exact this product name
 ifeq (sdk_phone_x86_64,$(TARGET_PRODUCT))
 PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
 endif
@@ -50,14 +56,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
 #
 $(call inherit-product-if-exists, device/generic/goldfish/x86_64-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/board/generic_x86_64/device.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/board/emulator_x86_64/device.mk)
 # region @boringdroid
 $(call inherit-product, vendor/boringdroid/boringdroid.mk)
 # endregion
-
-# Define the host tools and libs that are parts of the SDK.
--include sdk/build/product_sdk.mk
--include development/build/product_sdk.mk
 
 # Overrides
 # region @boringdroid
@@ -70,3 +72,7 @@ PRODUCT_NAME := boringdroid_x86_64
 PRODUCT_DEVICE := boringdroid_x86_64
 PRODUCT_MODEL := Boringdroid built for x86_64
 # endregion
+# Disable <uses-library> checks for SDK product. It lacks some libraries (e.g.
+# RadioConfigLib), which makes it impossible to translate their module names to
+# library name, so the check fails.
+PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
