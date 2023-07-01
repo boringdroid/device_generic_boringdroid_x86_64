@@ -1,5 +1,6 @@
 #
-# Copyright (C) 2009 The Android Open Source Project
+# Copyright (C) 2021 The Android Open Source Project
+# Copyright (C) 2023 The boringdroid team
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,67 +13,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-QEMU_USE_SYSTEM_EXT_PARTITIONS := true
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
-# region @boringdroid
-PRODUCT_PACKAGE_OVERLAYS += \
-    vendor/boringdroid/overlay
-# endregion
 
-# This is a build configuration for a full-featured build of the
-# Open-Source part of the tree. It's geared toward a US-centric
-# build quite specifically for the emulator, and might not be
-# entirely appropriate to inherit from for on-device configurations.
+PRODUCT_COPY_FILES += device/generic/boringdroid_x86_64/config.ini.pc:config.ini
 
-#
-# All components inherited here go to system image
-#
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_system.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/sdk_x86_64.mk)
 
-# Enable mainline checking for exact this product name
-ifeq (sdk_phone_x86_64,$(TARGET_PRODUCT))
-PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
-endif
-# region @boringdroid
-PRODUCT_COPY_FILES += \
-    device/generic/boringdroid_x86_64/data/etc/config.ini.boringdroid:config.ini \
-# endregion
-
-#
-# All components inherited here go to system_ext image
-#
-$(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_system_ext.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_system_ext.mk)
-
-#
-# All components inherited here go to product image
-#
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_product.mk)
-
-#
-# All components inherited here go to vendor image
-#
-$(call inherit-product-if-exists, device/generic/goldfish/x86_64-vendor.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/emulator_vendor.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/board/emulator_x86_64/device.mk)
-# region @boringdroid
-$(call inherit-product, vendor/boringdroid/boringdroid.mk)
-# endregion
-
-# Overrides
-# region @boringdroid
-# PRODUCT_BRAND := Android
-# PRODUCT_NAME := sdk_phone_x86_64
-# PRODUCT_DEVICE := generic_x86_64
-# PRODUCT_MODEL := Android SDK built for x86_64
-PRODUCT_BRAND := boringdroid
 PRODUCT_NAME := boringdroid_x86_64
 PRODUCT_DEVICE := boringdroid_x86_64
-PRODUCT_MODEL := Boringdroid built for x86_64
-# endregion
-# Disable <uses-library> checks for SDK product. It lacks some libraries (e.g.
-# RadioConfigLib), which makes it impossible to translate their module names to
-# library name, so the check fails.
-PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
+PRODUCT_BRAND := boringdroid
+PRODUCT_MODEL := boringdroid Emulator
+PRODUCT_PACKAGE_OVERLAYS := \
+    device/generic/boringdroid_x86_64/overlay \
+    vendor/boringdroid/overlay
+PRODUCT_COPY_FILES += \
+    device/generic/boringdroid_x86_64/data/etc/pc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/pc.xml
+PRODUCT_SDK_ADDON_SYS_IMG_SOURCE_PROP := device/generic/boringdroid/images_source.prop_template
