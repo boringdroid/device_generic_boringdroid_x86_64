@@ -23,7 +23,6 @@ PRODUCT_DEVICE := boringdroid_x86_64
 PRODUCT_BRAND := boringdroid
 PRODUCT_MODEL := boringdroid Emulator
 PRODUCT_PACKAGE_OVERLAYS := \
-    device/generic/boringdroid_x86_64/overlay \
     vendor/boringdroid/overlay
 PRODUCT_COPY_FILES += \
     device/generic/boringdroid_x86_64/data/etc/pc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/pc.xml
