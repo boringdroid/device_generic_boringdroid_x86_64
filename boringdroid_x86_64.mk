@@ -17,6 +17,7 @@
 PRODUCT_COPY_FILES += device/generic/boringdroid_x86_64/config.ini.pc:config.ini
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/sdk_x86_64.mk)
+$(call inherit-product, vendor/boringdroid/boringdroid.mk)
 
 PRODUCT_NAME := boringdroid_x86_64
 PRODUCT_DEVICE := boringdroid_x86_64
