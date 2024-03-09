@@ -18,6 +18,6 @@ hw.sensors.orientation=no
 hw.sensors.proximity=no
 image.sysdir.1=x86/
 skin.dynamic=no
-skin.name=3000x2000
-skin.path=3000x2000
+skin.name=1920x1080
+skin.path=1920x1080
 
