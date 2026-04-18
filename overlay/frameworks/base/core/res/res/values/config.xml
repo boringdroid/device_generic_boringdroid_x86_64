@@ -17,4 +17,14 @@
 <resources>
     <!-- Disabling content capture service by setting an empty string here -->
     <string name="config_defaultContentCaptureService" translatable="false"></string>
+
+    <!-- Suppress SystemUI's NavigationBar window so BoringdroidSystemUI's
+         TaskbarWindow is the sole bottom-of-screen bar. -->
+    <bool name="config_showNavigationBar">false</bool>
+
+    <!-- Redirect SystemUI's overview proxy binding to BoringdroidSystemUI.
+         SystemUI's OverviewProxyService reads this config, pulls the package
+         name, and binds QUICKSTEP_SERVICE against it. -->
+    <string name="config_recentsComponentName" translatable="false"
+            >com.boringdroid.systemui/com.boringdroid.systemui.overview.BoringdroidOverviewService</string>
 </resources>
